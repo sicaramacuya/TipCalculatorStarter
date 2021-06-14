@@ -67,9 +67,6 @@
                                                         <color key="textColor" name="tcHotPink"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" keyboardAppearance="light"/>
-                                                        <connections>
-                                                            <action selector="billAmountTextField:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="8kw-LN-h0o"/>
-                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -93,10 +90,6 @@
                                                             <segment title="20%"/>
                                                         </segments>
                                                         <color key="selectedSegmentTintColor" name="tcHotPink"/>
-                                                        <connections>
-                                                            <action selector="tipPercentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="hWX-cJ-pXg"/>
-                                                            <action selector="tipPercentSegmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="yzO-qI-1bg"/>
-                                                        </connections>
                                                     </segmentedControl>
                                                 </subviews>
                                             </stackView>

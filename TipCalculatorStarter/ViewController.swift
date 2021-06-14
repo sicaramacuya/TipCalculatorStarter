@@ -48,7 +48,6 @@ class ViewController: UIViewController {
         
         billAmountTextField.calculateButtonAction = { [self] in
             calculate()
-
         }
     }
     
@@ -59,21 +58,42 @@ class ViewController: UIViewController {
         }
         
         guard let billAmountText = self.billAmountTextField.text, let billAmount = Double(billAmountText) else {
+            reset()
             return
         }
 
         let roundedBillAmount = (100 * billAmount).rounded() / 100
         
-        let tipPercent = 0.15
+        let tipPercent: Double
+        switch tipPercentSegmentedControl.selectedSegmentIndex {
+        case 0:
+            tipPercent = 0.15
+        case 1:
+            tipPercent = 0.18
+        case 2:
+            tipPercent = 0.20
+        default:
+            preconditionFailure("Unexpected index.")
+        }
+        
+        
         let tipAmount = roundedBillAmount * tipPercent
         let roundedTipAmount = (100 * tipAmount).rounded() / 100
         
         let totalAmount = roundedBillAmount + roundedTipAmount
         
-        print("Bill Amount: \(roundedBillAmount)")
-        print("Tip Amount: \(roundedTipAmount)")
-        print("Total Amount: \(totalAmount)")
+        // Update UI
+        self.billAmountTextField.text = String(format: "%.2f", roundedBillAmount)
+        self.tipAmountLabel.text = String(format: "%.2f", roundedTipAmount)
+        self.totalAmountLabel.text = String(format: "%.2f", totalAmount)
         
+    }
+    
+    func reset() {
+        billAmountTextField.text = nil
+        tipPercentSegmentedControl.selectedSegmentIndex = 0
+        tipAmountLabel.text = "$0.00"
+        totalAmountLabel.text = "$0.00"
     }
     
     // MARK: - IBActions
@@ -83,10 +103,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tipPercentChanged(_ sender: Any) {
+        calculate()
     }
     
     @IBAction func resetButtonTapped(_ sender: Any) {
-        print("reset button tapped")
+            reset()
     }
     
     
